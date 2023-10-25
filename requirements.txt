@@ -1,0 +1,6 @@
+coverage
+dateparser
+fastapi
+pytest
+uvicorn[standard]
+httpx
