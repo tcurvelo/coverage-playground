@@ -1,18 +1,18 @@
 RUN ?= python -m
 
-.PHONY: server tests coverage
+.PHONY: server tests cov coverage
 
 server:
-	@echo "Starting server..."
 	$(RUN) uvicorn todate.api:app
 
-server-w-cov:
-	$(MAKE) server COVERAGE_FILE=.coverage_server RUN="coverage run --source=todate -m"
+cov:
+	$(eval export RUN := coverage run -a -m)
 
 tests:
-	COVERAGE_FILE=.coverage_client coverage run --source=todate -m pytest .
+	$(RUN) pytest .
 
-
-coverage:
-	coverage combine .coverage*
+report:
 	coverage report
+
+clean:
+	rm .coverage
